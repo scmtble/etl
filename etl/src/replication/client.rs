@@ -645,7 +645,7 @@ impl PgReplicationClient {
     /// Retrieves schema information for multiple tables.
     ///
     /// Tables without primary keys will be skipped and logged with a warning.
-    async fn get_table_schemas(
+    pub async fn get_table_schemas(
         &self,
         table_ids: &[TableId],
         publication_name: Option<&str>,
@@ -676,7 +676,7 @@ impl PgReplicationClient {
     ///
     /// If a publication is specified, only columns included in that publication
     /// will be returned.
-    async fn get_table_schema(
+    pub async fn get_table_schema(
         &self,
         table_id: TableId,
         publication: Option<&str>,
@@ -694,7 +694,7 @@ impl PgReplicationClient {
     /// Loads the table name and schema information for a given table OID.
     ///
     /// Returns a `TableName` containing both the schema and table name.
-    async fn get_table_name(&self, table_id: TableId) -> EtlResult<TableName> {
+    pub async fn get_table_name(&self, table_id: TableId) -> EtlResult<TableName> {
         let table_info_query = format!(
             "select n.nspname as schema_name, c.relname as table_name
             from pg_class c
@@ -804,7 +804,7 @@ impl PgReplicationClient {
     ///
     /// If a publication is specified, only columns included in that publication
     /// will be returned.
-    async fn get_column_schemas(
+    pub async fn get_column_schemas(
         &self,
         table_id: TableId,
         publication: Option<&str>,
